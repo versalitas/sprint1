@@ -34,19 +34,25 @@
    Haurà de mostrar-se per consola el compte del 0 al 9 deu vegades.*/
   
   
+  //definint el array
   let funcArray = [];
   
+  //definicó funció
   let countToNine = () => {
       for ( let i = 0 ; i <= 9 ; i++ )
       console.log(i);
   }
   
-  
+  //guardant la funció en el array
   for (let i = 0 ; i < 10 ; i++) {
-      console.log(`Ronda ${i + 1}:`); 
-      funcArray.push(countToNine());
+    funcArray.push(countToNine);
   }
   
+  //invocant la funció
+  for (let i = 0 ; i < funcArray.length ; i++) {
+    console.log(`Ronda ${i + 1}:`); 
+    funcArray[i]();
+}
   
   /* ex 1.1.3.2
    Una funció anònima autoinvocable igualada
