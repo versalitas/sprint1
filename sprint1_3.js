@@ -7,25 +7,40 @@ que imprimeixin un missatge diferent depenent
 de si la Promise es resol o no. 
 =============================================*/
 
+//function for random outcomes
+const diceRoll = () => {
+    if ((Math.floor(Math.random() * 11) % 2 === 0 )) {
+        return true;
+    } else {
+        return false;
+    }
+}  
 
-
-//funció amb resultat random basat en el nostre rentaplats d´IKEA renlig
+//IKEA "Renlig" dishwasher Promise function
 
 const renligProm = () => {
     return new Promise((resolve, reject) => {
-        if(Math.floor(Math.random() * 11) % 2 === 0 ){
+        if(isClean){
             resolve(`Yay, it's clean!`);
         } else {
-            reject(`Ew! Gross!`);
+            reject(`Ew! Gross! You'll have to wash up by hand.`);
         }
     });
 }
 
-const renligResult = renligProm();
-console.log(renligResult);
+const handleCleanSuccess = (resolvedValue) => {
+    console.log(resolvedValue);
+  };
+  
+const handleCleanFailure = (rejectReason) => {
+    console.log(rejectReason);
+  };
 
-  
-  
+let isClean = diceRoll();
+renligProm().then(handleCleanSuccess, handleCleanFailure);
+
+
+
  
 /*Exercici 1.3.1.2==============================
 Arrow function que rebi un paràmetre 
@@ -34,14 +49,7 @@ funció un missatge o un altre (que s'imprimirà per consola)
 en funció del paràmetre rebut.
 =============================================*/
 
-//function for very professional processing of grants
-const processApplication = () => {
-     if ((Math.floor(Math.random() * 11) % 2 === 0 )) {
-         return true;
-     } else {
-         return false;
-     }
-}       
+     
 
 //function that returns Promise
 const grantApplication = (isGranted) => {
@@ -65,11 +73,10 @@ const handleFailure = (rejectionValue) => {
 };
 
 //output
-let isGranted = processApplication();
+let isGranted = diceRoll();
 grantApplication(isGranted).then(handleSuccess, handleFailure);
 
-isGranted = processApplication();
-grantApplication(isGranted).then(handleSuccess, handleFailure);
+
 
 
 /*Exercici 1.3.2.1==============================
