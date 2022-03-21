@@ -59,49 +59,40 @@ faci instàncies d'una classe abstracta.
 Invoca-la amb diferents definicions.
 =============================================*/
 
-//classe "abstracte" DIY... amb un métode "abstracte"
+//classe abstracte DIY... 
 class Food{
-    constructor() {
+    constructor(name, flavor) {
+        this.name = name, 
+        this.flavor = flavor
         if(this.constructor === Food){
             throw new Error ("Abstract class: object can't be instantiated");
         }
     }
     showFlavor() {
-       throw new Error ("Abstract method: Not implemented");
+         console.log(`Today we serve ${this.name}, its taste is ${this.flavor}.`);
+        }
    }
-}
+
 
 //test que no es pot instanciar la classe
 //const pineApple = new Food(); 
 
-//classe amb una funció (de construcció... )
-class Fruit extends Food {
-    constructor(name, flavor){
-        super();
-        this.name = name;
-        this.flavor = flavor;
-    }
-    showFlavor() {
-        console.log(`Today we serve ${this.name}, its taste is ${this.flavor}.`);
-    }
-}
+//function que crea objectes
+function fruitMaker(fruitName, fruitFlavor){
+    return Object.create(Food.prototype, 
+        {'name': {value: fruitName}, 
+        'flavor': {value: fruitFlavor}});
+};
 
-//instanciant objectes i probant el metode
-const fruit1 = new Fruit('pineapple', 'sweet');
+//crida del métode
+fruit1 = fruitMaker('pineapple', 'sweet');
 fruit1.showFlavor();
-const fruit2 = new Fruit('lemon', 'sour');
+fruit2 = fruitMaker('lemon', 'sour');
 fruit2.showFlavor();
-
-// alternatiu amb factory function pasando el objecte que ha heredat el métode
-function createFruit(name, flavor) {
-    let fruit = Object.create(fruit1);
-    fruit.name = name;
-    fruit.flavor = flavor;
-    return fruit;
-}
-//instanciant objectes i probant el metode
-let fruit3 = createFruit('quince', 'tart');
+fruit3 = fruitMaker('quince', 'tart');
 fruit3.showFlavor();
+
+// Espero que esto se acerca... 
 
 
 
