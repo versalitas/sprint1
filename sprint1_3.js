@@ -13,10 +13,10 @@ de si la Promise es resol o no.
 
 const renligProm = () => {
     return new Promise((resolve, reject) => {
-        if(Math.floor(Math.random() * 10) % 2 === 0 ){
-            resolve(`Yay!`);
+        if(Math.floor(Math.random() * 11) % 2 === 0 ){
+            resolve(`Yay, it's clean!`);
         } else {
-            reject(`Ew!`);
+            reject(`Ew! Gross!`);
         }
     });
 }
@@ -27,19 +27,49 @@ console.log(renligResult);
   
   
  
-  
-
-
-   
- 
-
-
 /*Exercici 1.3.1.2==============================
 Arrow function que rebi un paràmetre 
 i una funció callback i li passi a la 
 funció un missatge o un altre (que s'imprimirà per consola) 
 en funció del paràmetre rebut.
 =============================================*/
+
+//function for very professional processing of grants
+const processApplication = () => {
+     if ((Math.floor(Math.random() * 11) % 2 === 0 )) {
+         return true;
+     } else {
+         return false;
+     }
+}       
+
+//function that returns Promise
+const grantApplication = (isGranted) => {
+    return new Promise((resolve, reject) => {
+        if(isGranted){
+            resolve(`Your application has been successfully processed.`);
+        } else {
+            reject(`Your application has mysteriously disappeared into the Twilight Zone.`);
+        }
+    })
+};
+    
+
+// handler functions
+const handleSuccess = (resValue) => {
+    console.log(resValue);
+};
+
+const handleFailure = (rejectionValue) => {
+    console.log(rejectionValue);
+};
+
+//output
+let isGranted = processApplication();
+grantApplication(isGranted).then(handleSuccess, handleFailure);
+
+isGranted = processApplication();
+grantApplication(isGranted).then(handleSuccess, handleFailure);
 
 
 /*Exercici 1.3.2.1==============================
