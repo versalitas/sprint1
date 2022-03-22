@@ -204,7 +204,7 @@ i el mostri per la consola.
 
 getEmployees(id)
 .then((resolvedValue) => {
-    return getSalary(resolvedValue)
+    return getSalary(resolvedValue);
 })
 .then((successHandler2) => {
     console.log(successHandler2);
