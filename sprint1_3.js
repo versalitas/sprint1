@@ -7,9 +7,9 @@ que imprimeixin un missatge diferent depenent
 de si la Promise es resol o no. 
 =============================================*/
 
-//function for random outcomes
+//function for random (and realistic) dishwasher outcomes
 const diceRoll = () => {
-    if ((Math.floor(Math.random() * 11) % 2 === 0 )) {
+    if ((Math.floor(Math.random() * 5) % 2 === 0 )) {
         return true;
     } else {
         return false;
@@ -21,9 +21,9 @@ const diceRoll = () => {
 const renligProm = () => {
     return new Promise((resolve, reject) => {
         if(isClean){
-            resolve(`Yay, it's clean!`);
+            resolve(`OMG, it's clean!`);
         } else {
-            reject(`Ew! Gross! You'll have to wash up by hand.`);
+            reject(`Something went wrong. Clean filters and refill salt.`);
         }
     });
 }
@@ -72,11 +72,10 @@ const handleFailure = (rejectionValue) => {
     console.log(rejectionValue);
 };
 
-//output
+//function: 
 let isGranted = diceRoll();
+//output
 grantApplication(isGranted).then(handleSuccess, handleFailure);
-
-
 
 
 /*Exercici 1.3.2.1==============================
@@ -108,10 +107,74 @@ let salaries = [{
     salary: 2000
 }];
 
+//search function (necessito practicar les metòdes dels arrays...)
+const searchEmployee = (numId) => {
+    
+    for (i = 0 ; i < employees.length ; i++) {
+         if(employees[i].id === numId) {
+             return employees[i].name;
+         }
+    }    
+}
+
+//generator of employee id:s
+const genNumEmployee = () => {return Math.floor((Math.random() * 5))};
+let numId = genNumEmployee();
+
+//method: returns promise
+getEmployees = (numId) => {
+    return new Promise((resolve, reject) => {
+        if(searchEmployee(numId) !== undefined) {
+            resolve(`${searchEmployee(numId)} is currently employed.`);
+        } else {
+            reject(`Bad request. Id not valid.`);
+        }
+    })    
+};
+
+// methods: handlers of success and failure
+const successHandler = (resValue) => {
+    console.log(resValue);
+};
+
+const failureHandler = (rejectValue) => {
+    console.log(rejectValue);
+};
+//calling the method
+getEmployees(numId).then(successHandler, failureHandler); 
+
+
 /*Exercici 1.3.2.2====================================
 Crea una altra arrow function getSalary que rebi com a 
 paràmetre un objecte employee i retorni el seu salari.
 =====================================================*/
+//random employee number
+let numObj = genNumEmployee();
+//verification of id generated 
+//console.log(`number: ${num}`);
+
+//method: retrieves salary property from an object passed as parametre
+const getSalary = (obj) => {
+    return new Promise ((resolve, reject) => {
+        if (obj !== undefined){
+            resolve(obj.salary);
+        } else {
+            reject(`Bad request. Employee not in the register.`)
+        }
+    })
+};
+
+const succHandler = (resValue) => {
+    console.log(resValue);
+}
+
+const failHandler = (rejectValue) => {
+    console.log(rejectValue);
+}
+
+//output
+getSalary(employees[numObj]).then(succHandler, failHandler);
+
 
 
 
@@ -120,9 +183,11 @@ Invoca la primera funció getEmployee
 i després getSalary niant l'execució de les dues promises.
 =====================================================*/
 
+
+
+
 /* Exercici 1.3.3.1====================================
 Fixa un element catch a la invocació del 
 nivell anterior que capturi qualsevol error 
 i el mostri per la consola. 
 =====================================================*/
-
