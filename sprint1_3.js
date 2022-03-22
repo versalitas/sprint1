@@ -28,6 +28,7 @@ const renligProm = () => {
     });
 }
 
+// handler functions
 const handleCleanSuccess = (resolvedValue) => {
     console.log(resolvedValue);
   };
@@ -72,7 +73,7 @@ const handleFailure = (rejectionValue) => {
     console.log(rejectionValue);
 };
 
-//function: 
+//calling randomized function: 
 let isGranted = diceRoll();
 //output
 grantApplication(isGranted).then(handleSuccess, handleFailure);
@@ -107,73 +108,78 @@ let salaries = [{
     salary: 2000
 }];
 
-//search function (necessito practicar les metòdes dels arrays...)
+//search function (necessito practicar les metòdes dels arrays.)
 const searchEmployee = (numId) => {
-    
     for (i = 0 ; i < employees.length ; i++) {
          if(employees[i].id === numId) {
-             return employees[i].name;
+             return employees[i];
          }
     }    
-}
+};
 
 //generator of employee id:s
 const genNumEmployee = () => {return Math.floor((Math.random() * 5))};
-let numId = genNumEmployee();
+let id = genNumEmployee();
 
 //method: returns promise
 getEmployees = (numId) => {
     return new Promise((resolve, reject) => {
         if(searchEmployee(numId) !== undefined) {
-            resolve(`${searchEmployee(numId)} is currently employed.`);
+            resolve(searchEmployee(numId));
         } else {
-            reject(`Bad request. Id not valid.`);
+            reject(`Bad request: ID not valid.`);
         }
     })    
 };
 
 // methods: handlers of success and failure
-const successHandler = (resValue) => {
-    console.log(resValue);
+const successHandler1 = (resolveValue) => {
+    console.log(resolveValue);
 };
 
-const failureHandler = (rejectValue) => {
+const failureHandler1 = (rejectValue) => {
     console.log(rejectValue);
 };
 //calling the method
-getEmployees(numId).then(successHandler, failureHandler); 
+/*getEmployees(id).then(successHandler1, failureHandler1);*/
 
 
 /*Exercici 1.3.2.2====================================
 Crea una altra arrow function getSalary que rebi com a 
 paràmetre un objecte employee i retorni el seu salari.
 =====================================================*/
-//random employee number
-let numObj = genNumEmployee();
-//verification of id generated 
-//console.log(`number: ${num}`);
 
-//method: retrieves salary property from an object passed as parametre
+
+
+
+const searchSalary = (obj) => {
+   if(salaries[i].id === obj.id) {
+        return salaries[i].salary;
+    }
+   
+}
+
 const getSalary = (obj) => {
     return new Promise ((resolve, reject) => {
-        if (obj !== undefined){
-            resolve(obj.salary);
+        if (obj!== undefined){
+            resolve(`${obj.name}'s salary: ${searchSalary(obj)}.`);
         } else {
             reject(`Bad request. Employee not in the register.`)
         }
     })
 };
 
-const succHandler = (resValue) => {
+const successHandler2 = (resValue) => {
     console.log(resValue);
 }
 
-const failHandler = (rejectValue) => {
+const failHandler2 = (rejectValue) => {
     console.log(rejectValue);
 }
 
 //output
-getSalary(employees[numObj]).then(succHandler, failHandler);
+/*const employeeObj = searchEmployee(id);
+getSalary(employeeObj).then(successHandler2, failHandler2);*/
 
 
 
@@ -184,10 +190,28 @@ i després getSalary niant l'execució de les dues promises.
 =====================================================*/
 
 
+/*
 
+
+el codig està en el pròxim apartat amb el catch posat
+
+
+
+*/
 
 /* Exercici 1.3.3.1====================================
 Fixa un element catch a la invocació del 
 nivell anterior que capturi qualsevol error 
 i el mostri per la consola. 
 =====================================================*/
+
+getEmployees(id)
+.then((resolvedValue) => {
+    return getSalary(resolvedValue)
+})
+.then((successHandler2) => {
+    console.log(successHandler2);
+})
+.catch((failHandler2) => {
+    console.log(failHandler2);
+});
