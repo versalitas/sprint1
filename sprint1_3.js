@@ -41,8 +41,6 @@ let isClean = diceRoll();
 renligProm().then(handleCleanSuccess, handleCleanFailure);
 
 
-
- 
 /*Exercici 1.3.1.2==============================
 Arrow function que rebi un paràmetre 
 i una funció callback i li passi a la 
@@ -50,7 +48,6 @@ funció un missatge o un altre (que s'imprimirà per consola)
 en funció del paràmetre rebut.
 =============================================*/
 
-     
 
 //function that returns Promise
 const grantApplication = (isGranted) => {
