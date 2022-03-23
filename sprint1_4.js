@@ -32,25 +32,47 @@ let salaries = [{
 }];
 
 
+//generating Id
+const randNum = Math.floor(Math.random() * 5);
 
-const numId = Math.floor(Math.random() * 4);
-const someEmpl = employees.find(employee => employee.id === numId);
-  console.log(numId);
-  console.log(someEmpl);
+//console.log(numId);  
+  
 
-
-
-/*const getEmployee = (someId) => {
-  if(employees.find(employee => {employee.id === someId})){
-    resolve(`Employee is currently employed`);
-  } else {
-   reject(new Error('Error. Not in the register.'))
-  }
+const getEmployee = (someId) => {
+  const employee = employees.find(employee => {return (employee.id === someId)});
+    return new Promise((resolve, reject) => {
+      if(employee){
+        resolve(`Employee ${employee.name} is currently employed`);
+      } else {
+        reject('Error. Not in the register.');
+      }
+    })
 };
 
-console.log(numId);
+getEmployee(randNum).then(res => {
+  console.log(res);
+});
+.catch(rej => {console.log(rej)});
 
-getEmployee(numId);*/
+
+
+const getSalary = (someObj) => {
+  const salaryObj = salaries.find(sal => {return (sal.id === someObj.id)});
+  return new Promise((reject, resolve) => {
+     if(salaryObj){
+       resolve(`${someObj.name} earns ${salaryObj.salary}.`);
+     } else {
+       reject(`Error. Not found`);
+     }
+  })
+}
+
+getSalary(employee[randNum])
+.then(res => {console.log(res)
+});
+.catch((rej) => {console.log(rej)});
+
+
 
 /*Exercici 1.4.1.2==============================
 
