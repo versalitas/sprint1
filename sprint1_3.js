@@ -9,7 +9,7 @@ de si la Promise es resol o no.
 
 //function for random (and realistic) dishwasher outcomes
 const diceRoll = () => {
-    if ((Math.floor(Math.random() * 5) % 2 === 0 )) {
+    if ((Math.floor(Math.random() * 2) % 2 === 0 )) {
         return true;
     } else {
         return false;
@@ -115,7 +115,7 @@ const searchEmployee = (numId) => {
 };
 
 //generator of employee id:s
-const genNumEmployee = () => {return Math.floor((Math.random() * 5))};
+const genNumEmployee = () => {return Math.floor((Math.random() * 4))};
 let id = genNumEmployee();
 
 //method: returns promise
@@ -124,7 +124,7 @@ getEmployees = (numId) => {
         if(searchEmployee(numId) !== undefined) {
             resolve(searchEmployee(numId));
         } else {
-            reject(`Bad request: ID not valid.`);
+            reject(`Error: ID not valid.`);
         }
     })    
 };
@@ -171,7 +171,7 @@ const getSalary = (obj) => {
         if (obj!== undefined){
             resolve(`${obj.name}'s salary: ${searchSalary(obj)}.`);
         } else {
-            reject(`Bad request. Employee not in the register.`)
+            reject(`Error. Employee not in the register.`)
         }
     })
 };
