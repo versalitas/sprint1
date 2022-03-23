@@ -143,7 +143,7 @@ paràmetre un objecte employee i retorni el seu salari.
 
 
 
-
+//search function
 const searchSalary = (obj) => {
     for (i = 0 ; i < salaries.length ; i++) {
          if(salaries[i].id === obj.id) {
@@ -151,6 +151,7 @@ const searchSalary = (obj) => {
          }
     }    
 };
+
 
 const getSalary = (obj) => {
     return new Promise ((resolve, reject) => {
@@ -162,25 +163,18 @@ const getSalary = (obj) => {
     })
 };
 
-const successHandler = (resValue) => {
-    console.log(resValue);
-}
-
-const failHandler = (rejectValue) => {
-    console.log(rejectValue);
-}
 
 const employeeObj = searchEmployee(someId);
-getSalary(employeeObj).then(successHandler, failHandler);
-
-
+getSalary(employeeObj)
+.then(resValue => {console.log(resValue)
+})
+.catch(rejectValue => {console.log(rejectValue)});
 
 
 /*Exercici 1.3.2.3====================================
 Invoca la primera funció getEmployee 
 i després getSalary niant l'execució de les dues promises.
 =====================================================*/
-
 
 /*
 
@@ -190,7 +184,6 @@ el codig està en el pròxim apartat amb el catch posat
 
 
 */
-
 /* Exercici 1.3.3.1====================================
 Fixa un element catch a la invocació del 
 nivell anterior que capturi qualsevol error 
@@ -201,8 +194,8 @@ getEmployees(someId)
 .then((resolvedValue) => {
     return getSalary(resolvedValue);
 })
-.then((successHandler) => {
-    console.log(successHandler);
+.then((resolvedValue) => {
+    console.log(resolvedValue);
 })
 .catch((rejectValue) => {
     console.log(rejectValue);
