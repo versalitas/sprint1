@@ -149,12 +149,22 @@ paràmetre un objecte employee i retorni el seu salari.
 
 
 
+/* esto funcionaba pero sin iteración???????????
+
+
 const searchSalary = (obj) => {
    if(salaries[i].id === obj.id) {
         return salaries[i].salary;
     }
-   
-}
+};*/
+
+const searchSalary = (obj) => {
+    for (i = 0 ; i < salaries.length ; i++) {
+         if(salaries[i].id === obj.id) {
+             return salaries[i].salary;
+         }
+    }    
+};
 
 const getSalary = (obj) => {
     return new Promise ((resolve, reject) => {
