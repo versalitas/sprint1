@@ -17,7 +17,6 @@ const diceRoll = () => {
 }  
 
 //IKEA "Renlig" dishwasher Promise function
-
 const renligProm = () => {
     return new Promise((resolve, reject) => {
         if(isClean){
@@ -105,7 +104,7 @@ let salaries = [{
     salary: 2000
 }];
 
-//search function (necessito practicar les metòdes dels arrays.)
+//search function 
 const searchEmployee = (numId) => {
     for (i = 0 ; i < employees.length ; i++) {
          if(employees[i].id === numId) {
@@ -115,8 +114,8 @@ const searchEmployee = (numId) => {
 };
 
 //generator of employee id:s
-const genNumEmployee = () => {return Math.floor((Math.random() * 4))};
-let id = genNumEmployee();
+const genNumEmployee = () => {return Math.floor((Math.random() * 5))};
+let someId = genNumEmployee();
 
 //method: returns promise
 getEmployees = (numId) => {
@@ -129,16 +128,12 @@ getEmployees = (numId) => {
     })    
 };
 
-// methods: handlers of success and failure
-const successHandler1 = (resolveValue) => {
-    console.log(resolveValue);
-};
 
-const failureHandler1 = (rejectValue) => {
-    console.log(rejectValue);
-};
-//calling the method
-/*getEmployees(id).then(successHandler1, failureHandler1);*/
+
+getEmployees(someId)
+.then(resValue => {console.log(resValue)
+})
+.catch(rejectValue => {console.log(rejectValue)});
 
 
 /*Exercici 1.3.2.2====================================
@@ -148,15 +143,6 @@ paràmetre un objecte employee i retorni el seu salari.
 
 
 
-
-/* esto funcionaba pero sin iteración???????????
-
-
-const searchSalary = (obj) => {
-   if(salaries[i].id === obj.id) {
-        return salaries[i].salary;
-    }
-};*/
 
 const searchSalary = (obj) => {
     for (i = 0 ; i < salaries.length ; i++) {
@@ -176,17 +162,16 @@ const getSalary = (obj) => {
     })
 };
 
-const successHandler2 = (resValue) => {
+const successHandler = (resValue) => {
     console.log(resValue);
 }
 
-const failHandler2 = (rejectValue) => {
+const failHandler = (rejectValue) => {
     console.log(rejectValue);
 }
 
-//output
-/*const employeeObj = searchEmployee(id);
-getSalary(employeeObj).then(successHandler2, failHandler2);*/
+const employeeObj = searchEmployee(someId);
+getSalary(employeeObj).then(successHandler, failHandler);
 
 
 
@@ -212,13 +197,13 @@ nivell anterior que capturi qualsevol error
 i el mostri per la consola. 
 =====================================================*/
 
-getEmployees(id)
+getEmployees(someId)
 .then((resolvedValue) => {
     return getSalary(resolvedValue);
 })
-.then((successHandler2) => {
-    console.log(successHandler2);
+.then((successHandler) => {
+    console.log(successHandler);
 })
-.catch((failHandler2) => {
-    console.log(failHandler2);
+.catch((rejectValue) => {
+    console.log(rejectValue);
 });
