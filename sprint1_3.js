@@ -8,7 +8,7 @@ de si la Promise es resol o no.
 =============================================*/
 
 //function for random (and realistic) dishwasher outcomes
-const diceRoll = () => {
+const coinToss = () => {
     if ((Math.floor(Math.random() * 2) % 2 === 0 )) {
         return true;
     } else {
@@ -36,7 +36,7 @@ const handleCleanFailure = (rejectReason) => {
     console.log(rejectReason);
   };
 
-let isClean = diceRoll();
+let isClean = coinToss();
 renligProm().then(handleCleanSuccess, handleCleanFailure);
 
 
@@ -70,7 +70,7 @@ const handleFailure = (rejectionValue) => {
 };
 
 //calling randomized function: 
-let isGranted = diceRoll();
+let isGranted = coinToss();
 //output
 grantApplication(isGranted).then(handleSuccess, handleFailure);
 
