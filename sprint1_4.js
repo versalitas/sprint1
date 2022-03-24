@@ -112,7 +112,7 @@ const employeeFunc = async(numId) => {
   } catch (err) {
     console.log(`Error.`)
   }
-}
+};
 
 employeeFunc(randId);
 
@@ -129,7 +129,8 @@ const coinTosser = () => {
   } else {
       return false;
   }
-} 
+}; 
+
 coinToss = coinTosser();
 console.log(`Your coin toss: ${coinToss}`);
 
@@ -142,7 +143,7 @@ const sprintFinished = (randValue) => {
         reject(`Error, error, error, you'll need to practise more.`);
       }
     });
-}
+};
 
 const anotherFunc = async(randValue) => {
   try {
@@ -151,7 +152,7 @@ const anotherFunc = async(randValue) => {
   } catch (err) {
     console.log(err);
   }
-}
+};
 
 //calling function
 anotherFunc(coinToss);
