@@ -1,5 +1,4 @@
 /*Exercici 1.3.1.1==============================
-
 Funció que retorni una Promise que 
 invoqui la funció resolve() o reject() que rep. 
 Invoca-la passant-li les dues funcions de manera 
@@ -17,9 +16,9 @@ const coinToss = () => {
 }  
 
 //IKEA "Renlig" dishwasher Promise function
-const renligProm = () => {
+const renligProm = (cleanState) => {
     return new Promise((resolve, reject) => {
-        if(isClean){
+        if(cleanState){
             resolve(`OMG, it's clean!`);
         } else {
             reject(`Something went wrong. Clean filters and refill salt.`);
@@ -47,33 +46,25 @@ funció un missatge o un altre (que s'imprimirà per consola)
 en funció del paràmetre rebut.
 =============================================*/
 
+//calling randomized function: 
+let isGranted = coinToss();
 
-//function that returns Promise
-const grantApplication = (isGranted) => {
-    return new Promise((resolve, reject) => {
-        if(isGranted){
-            resolve(`Your application has been successfully processed.`);
-        } else {
-            reject(`Your application has mysteriously disappeared into the Twilight Zone.`);
-        }
-    })
+//function messages
+const automatedReply = (result) => {
+    if(result){
+        return `Your application has been successfully processed.`;
+    } else {
+        return `Your application has mysteriously disappeared into the Twilight Zone.`;
+    }
+}
+//output function
+const grantApplication = (result, replyFunc) => {
+    const reply = replyFunc(result);
+    console.log(reply);
 };
     
 
-// handler functions
-const handleSuccess = (resValue) => {
-    console.log(resValue);
-};
-
-const handleFailure = (rejectionValue) => {
-    console.log(rejectionValue);
-};
-
-//calling randomized function: 
-let isGranted = coinToss();
-//output
-grantApplication(isGranted).then(handleSuccess, handleFailure);
-
+grantApplication(isGranted, automatedReply);
 
 /*Exercici 1.3.2.1==============================
 Donats els objectes employees i salaries, 
@@ -156,7 +147,7 @@ const searchSalary = (obj) => {
 const getSalary = (obj) => {
     return new Promise ((resolve, reject) => {
         if (obj!== undefined){
-            resolve(`${obj.name}'s salary: ${searchSalary(obj)}.`);
+            resolve(searchSalary(obj));
         } else {
             reject(`Error. Employee not in the register.`)
         }
@@ -166,7 +157,7 @@ const getSalary = (obj) => {
 
 const employeeObj = searchEmployee(someId);
 getSalary(employeeObj)
-.then(resValue => {console.log(resValue)
+.then(resValue => {console.log(`The salary for ${employeeObj.name} is ${resValue}`);
 })
 .catch(rejectValue => {console.log(rejectValue)});
 
@@ -177,12 +168,7 @@ i després getSalary niant l'execució de les dues promises.
 =====================================================*/
 
 /*
-
-
 el codig està en el pròxim apartat amb el catch posat
-
-
-
 */
 /* Exercici 1.3.3.1====================================
 Fixa un element catch a la invocació del 
@@ -190,13 +176,16 @@ nivell anterior que capturi qualsevol error
 i el mostri per la consola. 
 =====================================================*/
 
+
 getEmployees(someId)
 .then((resolvedValue) => {
     return getSalary(resolvedValue);
 })
 .then((resolvedValue) => {
-    console.log(resolvedValue);
+    console.log(`The salary is ${resolvedValue}.`);
 })
 .catch((rejectValue) => {
     console.log(rejectValue);
 });
+
+   
