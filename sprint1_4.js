@@ -33,44 +33,65 @@ let salaries = [{
 
 
 //generating Id
-const randNum = Math.floor(Math.random() * 5);
+const randId = Math.floor(Math.random() * 5);
 
 //console.log(numId);  
-  
+console.log(`RandomId is ${randId}`);
 
-const getEmployee = (someId) => {
-  const employee = employees.find(employee => {return (employee.id === someId)});
-    return new Promise((resolve, reject) => {
-      if(employee){
-        resolve(`Employee ${employee.name} is currently employed`);
-      } else {
-        reject('Error. Not in the register.');
-      }
-    })
+//search function 
+const searchEmployee = (numId) => {
+  for (i = 0 ; i < employees.length ; i++) {
+       if(employees[i].id === numId) {
+           return employees[i];
+       }
+  }    
 };
 
-getEmployee(randNum).then(res => {
-  console.log(res);
-});
-.catch(rej => {console.log(rej)});
+
+//method: returns promise
+getEmployee = (numId) => {
+  return new Promise((resolve, reject) => {
+      if(searchEmployee(numId) !== undefined) {
+          resolve(searchEmployee(numId));
+      } else {
+          reject(`Error: ID not valid.`);
+      }
+  })    
+};
 
 
+getEmployee(randId)
+.then(resValue => {console.log(resValue)
+})
+.catch(rejectValue => {console.log(rejectValue)});
 
-const getSalary = (someObj) => {
-  const salaryObj = salaries.find(sal => {return (sal.id === someObj.id)});
-  return new Promise((reject, resolve) => {
-     if(salaryObj){
-       resolve(`${someObj.name} earns ${salaryObj.salary}.`);
-     } else {
-       reject(`Error. Not found`);
-     }
+
+//search function
+const searchSalary = (obj) => {
+  for (i = 0 ; i < salaries.length ; i++) {
+       if(salaries[i].id === obj.id) {
+           return salaries[i].salary;
+       }
+  }    
+};
+
+
+const getSalary = (obj) => {
+  return new Promise ((resolve, reject) => {
+      if (obj!== undefined){
+          resolve(searchSalary(obj));
+      } else {
+          reject(`Error. Employee not in the register.`)
+      }
   })
-}
+};
 
-getSalary(employee[randNum])
-.then(res => {console.log(res)
-});
-.catch((rej) => {console.log(rej)});
+
+const employeeObj = searchEmployee(randId);
+getSalary(employeeObj)
+.then(resValue => {console.log(resValue)
+})
+.catch(rejectValue => {console.log(rejectValue)});
 
 
 
@@ -82,6 +103,19 @@ el seu salari, usant les funcions que has
 definit a l'exercici anterior.
 =============================================*/
 
+
+const employeeFunc = async(numId) => {
+  try{
+    const currentEmployee = await getEmployee(numId);
+    const salary = await getSalary(currentEmployee);
+    console.log(`${currentEmployee.name}: ${salary}`);
+  } catch (err) {
+    console.log(`Error.`)
+  }
+}
+
+employeeFunc(randId);
+
 /*Exercici 1.4.2.1==============================
 
 Crea una nova funció asíncrona que cridi a una 
@@ -89,14 +123,43 @@ altra que retorni una Promise que efectuï la
 seva funció resolve() després de 2 segons 
 de la seva invocació.
 =============================================*/
+const coinTosser = () => {
+  if ((Math.floor(Math.random() * 2) % 2 === 0 )) {
+      return true;
+  } else {
+      return false;
+  }
+} 
+coinToss = coinTosser();
+console.log(`Your coin toss: ${coinToss}`);
 
-/*Exercici 1.4.2.2==============================
+const sprintFinished = (randValue) => {
+    return new Promise((resolve, reject) => {
+      if(randValue){
+        setTimeout(() => {
+          resolve(`Yay! Continue to next sprint.`);}, 2000);
+      } else {
+        reject(`Error, error, error, you'll need to practise more.`);
+      }
+    });
+}
 
-Crea una nova funció asíncrona que cridi a 
-una altra que retorni una Promise que 
-efectuï la seva funció resolve() 
-després de 2 segons de la seva invocació.
-=============================================*/
+const anotherFunc = async(randValue) => {
+  try {
+    const result = await(sprintFinished(randValue));
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+//calling function
+anotherFunc(coinToss);
+
+ 
+
+  
+
 
 
 
@@ -105,4 +168,6 @@ després de 2 segons de la seva invocació.
 Captura tots els errors possibles dels 
 nivells 1 i 2.
 =============================================*/
+
+/* están arriba ya incorporados.  */
 
