@@ -179,10 +179,11 @@ i el mostri per la consola.
 
 getEmployees(someId)
 .then((resolvedValue) => {
+    console.log(`${resolvedValue.name} is currently employed.` )
     return getSalary(resolvedValue);
 })
 .then((resolvedValue) => {
-    console.log(`The salary is ${resolvedValue}.`);
+    console.log(`The salary of this employee is ${resolvedValue}.`);
 })
 .catch((rejectValue) => {
     console.log(rejectValue);
