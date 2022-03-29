@@ -24,7 +24,7 @@ let repeatMessage = (message, exitMessage, turns) => {
 
 }   
     
-repeatMessage(`Fatal error`, `KABOOM!!!!`, 5); 
+repeatMessage(`Fatal error`, `False alarm.`, 5); 
 
 
 
@@ -38,18 +38,18 @@ escrigui una frase en un fitxer.
 
 const fs = require('fs');
 
-const writeTxt = (message, fileName) => {
+const writeTxt = () => {
 
-    fs.writeFile(fileName, message, err => {
+    fs.writeFile('./someText.txt', "Did this actually work?", err => {
     if (err) {
         console.error(err);
         
     }
-        console.log(`The file ${fileName} has been created`})
+        console.log(`The file ${'./someText.txt'} has been created`)
     })
 }
 
-writeTxt("Did this actually work?",'./someText.txt' );
+writeTxt();
 
 /*Exercici 1.5.1.3==============================
 
@@ -59,21 +59,22 @@ contingut del fitxer de l'exercici anterior.
 
 //fs module imported in the last exercise
 
-const readTxt = (fileName) => {
-    fs.readFile(fileName, 'utf8', (err, data) => {
+const readText = () => {
+    fs.readFile('./someText.txt', 'utf8', (err, data) => {
     if (err) {
         console.error(err);
         
     }
     console.log(data);
     return data;
+    
     });
 }
  
    
 //calling the function
-const newMessage = readTxt('./someText.txt');
-console.log(`s this is it ${newMessage}`);
+readText();
+
 
 /*Exercici 1.5.2.1==============================
 
@@ -89,10 +90,10 @@ const gzip = zlib.createGzip();
 
 //Zip function
 
-const myZipper = async(someFile) => {
+const myZipper = async() => {
     try {
-        const input = await fs.createReadStream(someFile);
-        const output = await fs.createWriteStream(someFile);
+        const input = await fs.createReadStream('./someText.txt');
+        const output = await fs.createWriteStream('./someText.txt');
         const result = await input.pipe(gzip).pipe(output);
         if(result){
             console.log('Compression has been successful');
@@ -102,7 +103,7 @@ const myZipper = async(someFile) => {
     }
 }
 
-myZipper('./someText.txt');
+myZipper();
 
 /*Exercici 1.5.2.2==============================
 
@@ -116,7 +117,7 @@ l'ordinador utilizant Node Child Processes.
 //importando modulo
 const { exec } = require('child_process');
 
-exec('ls -lh', {cwd: '/Users'}, (error, stdout, stderr) => {
+const listToTerminal = () => {exec('ls -lh', {cwd: '/Users'}, (error, stdout, stderr) => {
   
    if (error) {
     console.error(`error: ${error.message}`);
@@ -130,12 +131,19 @@ exec('ls -lh', {cwd: '/Users'}, (error, stdout, stderr) => {
 
   console.log(`stdout:\n${stdout}`);
 });
+}
 
+listToTerminal();
 
 /*Exercici 1.5.3.1.1============================
-
+Create some functions with uncanny similarities to
+Frankenstein's monster... 
 =============================================*/
 
+
+
+//starting off optimistic... :)
+//before getting stuck in terrible mess :_ _ _(
 
 
 //1
@@ -144,13 +152,18 @@ exec('ls -lh', {cwd: '/Users'}, (error, stdout, stderr) => {
 //a partir del fitxer del nivell 1
 
 //importing vital modules
-const { Buffer } = require('buffer')
-const crypto = require('crypto');
+
+
+const { Buffer } = require('Buffer')
+const { crypto } = require('crypto');
 
 //encodes a text to hex and base64
- const myFirstEncoder = (readFunc, writeFunc) => {
+ const myFirstEncoder = sync(readFunc, writeFunc) => {
    
-    const message = readFunc('./someText.txt');
+    //reads message from original file
+    const message = await readFunc('./someText.txt');
+    
+    //creates buffer obj for encoding
     const bufferObj = Buffer.from(message, 'utf8');
 
     // encodes a string to hexidecimal via buffer obj
@@ -159,11 +172,14 @@ const crypto = require('crypto');
     // encodes a string to base64 via buffer obj
     const base64Message = bufferObj.toString('base64');
     
+    //write to files
     writeFunc(`./someTextHex.txt`, hexMessage);
-    writeFunc(`./someTextBase64.txt`, base64Message):
+    writeFunc(`./someTextBase64.txt`, base64Message);
 
-}    
+}  
 
+myFirstEncoder(readTxt, writeTxt);
+/*
 //2
 // Crea una funció que guardi els fitxers del punt anterior, 
 //ara encriptats amb l'algoritme aes-192-cbc, i esborri els fitxers inicials.
@@ -171,49 +187,51 @@ const crypto = require('crypto');
 //encryptation using aes-192-cbc
 
 const encryptAes = (message) => {
+ //OMG!!!   
     const algorithm = 'aes-192-cbc';
     const password = 'querty'
     const key = crypto.scryptSync(password, 'salt', 24);
     const iv = Buffer.alloc(16, 0); 
     const cipher = crypto.createCipheriv(algorithm, key, iv);
     const encrypted = cipher.update(message, 'utf8', 'hex');
-    return encrypted += cipher.final('hex');
+    encrypted += cipher.final('hex');
+    return encrypted;
 }
 
-//main function
-
-const encryptAndSave = (readFunc, writeFunc, encryptFunc) => {
-    
-    let hexMessage = readFunc('./someTextHex.txt');
-    let encryptedHexMessage = encryptFunc(hexMessage);
-    
-    let base64Message = readFunc('./someTextBase64.txt');
-    let encryptedBase64Message = encryptFunc(base64Message);
-
-    writeFunc()
-
-
+//deletes file
+const deleteFile = (fileName) => { 
+    fs.unlink(fileName, function(err))
+    if (err){
+        throw (err);
+    }
+    console.log('File deleted!');
 }
 
 
+//main function of the exercise
+//???????????????????????????????????
+//
+// Lenghty code in a function? 
+// Passing functions as parametres? 
+// What is the better alternative???????
 
+const encryptAndSave = (readFunc, writeFunc, encryptFunc, deleteFunc) => {
+    
+    const hexMessage = readFunc('./someTextHex.txt');
+    const encryptedHexMessage = encryptFunc(hexMessage);
+    
+    const base64Message = readFunc('./someTextBase64.txt');
+    const encryptedBase64Message = encryptFunc(base64Message);
 
+    //creates new files with 
+    writeFunc('./someTextHexEncrypt.txt', hexMessage);
+    writeFunc('./someTextBase64Encrypt.txt', base64Message);
+    
+    //deletes original files
+    deleteFile('./someTextHex.txt');
+    deleteFile('./someTextBase64.txt');
+}
 
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////
-
- 
-  
 
 
 //3
@@ -222,17 +240,62 @@ const encryptAndSave = (readFunc, writeFunc, encryptFunc) => {
 //generar una còpia de l'inicial 
 
 
+//decrypter function
+const decrypter = (message) => {
+    const algorithm = 'aes-192-cbc';
+    const password = 'querty';
+    const key = crypto.scryptSync(password, 'acy16BytesString', 24)    
+    const iv = Buffer.alloc(16, 0);
+    const decipher = crypto.createDecipheriv(algorithm, key, iv);
+    let decrypted = decipher.update(message, 'hex', 'utf8');
+    return decrypted += decipher.final('utf8');
+  }
+//veryfying function
+ const verify = (txt1, txt2) => {
+        new Promise((reject, resolve) => {
+            if(txt1 === txt2){
+                resolve(true);
+            } else {
+                reject (err);
+            }    
+        })
+    }
 
+   
+  
+    const txtDecrypter = async(deleteFunc, decryptFunc, verifyFunc) => {
+        try{
+        //decrypting and decoding initially hex encoded
+        const encryptedHexMessage = readTxt('./someTextHexEncrypt.txt');
+        const hexMessage = decryptFunc(encryptedHexMessage); 
+        const hexbufferObj = Buffer.from(hexMessage, 'hex');
+        const initialTxt1 = hexbufferObj.toString('utf8');
+        
+         //decrypting and decoding initially base 64 encoded
+         const encryptedBase64Message = readTxt('./someTexBase64Encrypt.txt');
+         const base64Message = decryptFunc(encryptedBase64Message); 
+         const base64bufferObj = Buffer.from(base64Message, 'base64');
+         const initialTxt2 = hexbufferObj.toString('utf8');
 
+         const isOk = await verifyFunc(initialTxt1, initialTxt2);
 
+         if(isOk){
 
-
-
+            deleteFunc('./someTextHexEncrypt.txt');
+            deleteFunc('./someTextBase64Encrypt.txt');
+            writeFunc('./someText.txt', initialTxt1);
+        }
+       } catch(err){
+           console.log(`Shit happens when you assign rewriting 
+           the Divine Comedy of Node.js to someone who just learned the alphabet.`)
+       }
+    }   
+    
 
 
 //4
 //Un README 
-//amb instruccions per a l'execució de cada part
+//amb instruccions per a l'execució de cada part */
 
 
 
