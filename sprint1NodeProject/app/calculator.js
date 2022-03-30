@@ -1,29 +1,32 @@
 
 
-const sumNums = (a, b) => {
+const sum = (a, b) => {
   return (a + b);
 
 }
 
-module.exports = sumNums;
+module.exports.sum = sum;
 
-const ´substractNums = (a, b) => {
+const ´substract = (a, b) => {
  return(a - b);
 }
 
-module.exports = restNums;
+module.exports.subtract = subtract;
 
-const multiplyNums = (a, b) => {
+const multiply = (a, b) => {
  return(a * b);
 }
 
-module.exports = multiplyNums;
+module.exports.multiply = multiply;
 
 const divideNums = (a, b) => {
  return(a / b);
 }
 
-module.exports = divideNums;
+module.exports.divide = divide;
+
+
+};
 
 
 
