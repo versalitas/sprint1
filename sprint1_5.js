@@ -90,18 +90,14 @@ const gzip = zlib.createGzip();
 
 //Zip function
 
-const myZipper = async() => {
-    try {
-        const input = await fs.createReadStream('./someText.txt');
-        const output = await fs.createWriteStream('./someText.txt');
-        const result = await input.pipe(gzip).pipe(output);
-        if(result){
-            console.log('Compression has been successful');
-        }
-    } catch(err){
-        console.log('Non specified error.')
-    }
-}
+const myZipper = () => {
+
+    const gzip = zlib.createGzip();  
+    const readStream = fs.createReadStream('./someText.txt');  
+    const writeStream = fs.createWriteStream('./someText.txt.gz');  
+    readStream.pipe(gzip).pipe(writeStream); 
+    console.log(`File has been compressed`);
+} 
 
 myZipper();
 
@@ -113,6 +109,8 @@ l'ordinador utilizant Node Child Processes.
 =============================================*/
 
 //Funciona en el mac...
+//directori d'usuari lo interpreto como User directory.
+
 
 //importando modulo
 const { exec } = require('child_process');
@@ -153,7 +151,7 @@ Frankenstein's monster...
 
 //importing vital modules
 
-
+/*
 const { Buffer } = require('Buffer')
 const { crypto } = require('crypto');
 
@@ -161,7 +159,7 @@ const { crypto } = require('crypto');
  const myFirstEncoder = sync(readFunc, writeFunc) => {
    
     //reads message from original file
-    const message = await readFunc('./someText.txt');
+    const message = readFunc('./someText.txt');
     
     //creates buffer obj for encoding
     const bufferObj = Buffer.from(message, 'utf8');
@@ -178,7 +176,7 @@ const { crypto } = require('crypto');
 
 }  
 
-myFirstEncoder(readTxt, writeTxt);
+myFirstEncoder();
 /*
 //2
 // Crea una funció que guardi els fitxers del punt anterior, 
@@ -208,14 +206,9 @@ const deleteFile = (fileName) => {
 }
 
 
-//main function of the exercise
-//???????????????????????????????????
-//
-// Lenghty code in a function? 
-// Passing functions as parametres? 
-// What is the better alternative???????
 
-const encryptAndSave = (readFunc, writeFunc, encryptFunc, deleteFunc) => {
+
+const encryptAndSave = () => {
     
     const hexMessage = readFunc('./someTextHex.txt');
     const encryptedHexMessage = encryptFunc(hexMessage);
@@ -264,7 +257,7 @@ const decrypter = (message) => {
    
   
     const txtDecrypter = async(deleteFunc, decryptFunc, verifyFunc) => {
-        try{
+        
         //decrypting and decoding initially hex encoded
         const encryptedHexMessage = readTxt('./someTextHexEncrypt.txt');
         const hexMessage = decryptFunc(encryptedHexMessage); 
@@ -277,7 +270,7 @@ const decrypter = (message) => {
          const base64bufferObj = Buffer.from(base64Message, 'base64');
          const initialTxt2 = hexbufferObj.toString('utf8');
 
-         const isOk = await verifyFunc(initialTxt1, initialTxt2);
+         const isOk = verifyFunc(initialTxt1, initialTxt2);
 
          if(isOk){
 
