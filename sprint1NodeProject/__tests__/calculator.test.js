@@ -17,3 +17,5 @@ test('multiplies 2 with 2 to equal 4'), () => {
 
 test('divides 4 with 2 to equal 2'), () => {
   expect(divide(4, 2).toBe(2));}
+
+  
