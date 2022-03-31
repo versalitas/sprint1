@@ -1,10 +1,5 @@
 
 
-
-
-
-
-
 /*Exercici 1.5.1.1==============================
 
 Crea una funció que imprimeixi recursivament 
@@ -25,9 +20,6 @@ let repeatMessage = (message, exitMessage, turns) => {
 }   
     
 repeatMessage(`Fatal error`, `False alarm.`, 5); 
-
-
-
 
 
 /*Exercici 1.5.1.2==============================
@@ -86,9 +78,7 @@ del nivell 1.
 const zlib = require('zlib');
 const gzip = zlib.createGzip();
 
- 
-
-//Zip function
+ //Zip function
 
 const myZipper = () => {
 
@@ -138,7 +128,9 @@ Create some functions with uncanny similarities to
 Frankenstein's monster... 
 =============================================*/
 
-
+//Need to sort out input/ output functions
+//still too newbie with asynchronous coding
+//to pull this off
 
 //starting off optimistic... :)
 //before getting stuck in terrible mess :_ _ _(
