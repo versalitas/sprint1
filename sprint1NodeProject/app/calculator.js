@@ -7,11 +7,11 @@ const sum = (a, b) => {
 
 module.exports.sum = sum;
 
-const ´substract = (a, b) => {
+const substract = (a, b) => {
  return(a - b);
 }
 
-module.exports.subtract = subtract;
+module.exports.substract = substract;
 
 const multiply = (a, b) => {
  return(a * b);
@@ -19,14 +19,14 @@ const multiply = (a, b) => {
 
 module.exports.multiply = multiply;
 
-const divideNums = (a, b) => {
+const divide = (a, b) => {
  return(a / b);
 }
 
 module.exports.divide = divide;
 
 
-};
+
 
 
 
