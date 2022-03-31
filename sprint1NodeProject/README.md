@@ -27,9 +27,12 @@ npm test
 *Create a file with basic calculation functions 
 (sum, substract, multiply, and divide) and create a test.*
 
+```
 Original code (calculus functions): app/calculator.js
 Test functions: __tests__/calculate.test.js
-Test output: checks if the calculus functions turn back the correct answer.
+```
+  
+Test output: checks if the calculus functions return the correct answer.
 
 **Task 1.2:**
 
@@ -52,7 +55,7 @@ Test output: Checks if the sprintFinished function returns correct answer when i
 *Create the necessary tests for checking the execution of Promises and Callbacks level 2.3
 Original code (getter Functions): app/getEmployee2.js
 Test functions: __tests__/getEmployee2.test.js*
-
+Test output: Checks if the sprintFinished function returns correct answer when invoked.
 ### 1.6.2
 ---
 *Create a mock que checks the calls to the Person class constructor and the method sayName of Classes and Arrow Functions level 2.2.*
