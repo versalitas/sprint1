@@ -63,7 +63,8 @@ Test functions: ../__tests__/getEmployee2.test.js*
 *Create a mock que checks the calls to the Person class constructor and the method sayName of Classes and Arrow Functions level 2.2.*
 
 Original code (Person Class with sayName function): app/person.js
-Test functions: ../__mocks__ __tests__/person.test.js
+Test functions: ../__mocks__/person.js 
+__tests__/person.test.js
 Test output: The test creates a mock of the person.js file. Checks how many times the function is invoked and the method called... or that was the idea at least.
 
 ### 1.6.3
