@@ -10,7 +10,7 @@ Original code to be tested: ../app
   
 Testing code folder:  ../__tests__ 
 
-Mock code folder: ../`__mocks__`
+Mock code folder: ../__mocks__
 
 ### TEST EXECUTION:
 
