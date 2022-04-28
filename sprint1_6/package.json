@@ -6,10 +6,6 @@
   "scripts": {
     "test": "jest"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/versalitas/sprint1.git"
-  },
   "keywords": [
     "test",
     "jest",
@@ -17,10 +13,7 @@
   ],
   "author": "MK",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/versalitas/sprint1/issues"
-  },
-  "homepage": "https://github.com/versalitas/sprint1#readme",
+  
   "devDependencies": {
     "jest": "^28.0.2"
   }
