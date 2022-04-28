@@ -100,12 +100,13 @@ l'ordinador utilizant Node Child Processes.
 
 //Funciona en el mac...
 //directori d'usuari lo interpreto como User directory.
+//changed {cwd: '/Users'} to this.pwd
 
 
 //importando modulo
 const { exec } = require('child_process');
 
-const listToTerminal = () => {exec('ls -lh', {cwd: '/Users'}, (error, stdout, stderr) => {
+const listToTerminal = () => {exec('ls -lh', this.pwd, (error, stdout, stderr) => {
   
    if (error) {
     console.error(`error: ${error.message}`);
