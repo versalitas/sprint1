@@ -1,7 +1,7 @@
 {
-  "name": "1.6.testing",
+  "name": "sprint1_6",
   "version": "1.0.0",
-  "description": "\"exercises of testing code\"",
+  "description": " tests",
   "main": "index.js",
   "scripts": {
     "test": "jest"
@@ -11,14 +11,17 @@
     "url": "git+https://github.com/versalitas/sprint1.git"
   },
   "keywords": [
-    "[\"test\"",
-    "\"jest\"",
-    "\"node.js]"
+    "test",
+    "jest",
+    "node"
   ],
-  "author": "versalitas",
+  "author": "MK",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/versalitas/sprint1/issues"
   },
-  "homepage": "https://github.com/versalitas/sprint1#readme"
+  "homepage": "https://github.com/versalitas/sprint1#readme",
+  "devDependencies": {
+    "jest": "^28.0.2"
+  }
 }
