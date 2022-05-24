@@ -40,3 +40,13 @@ server: processed in the server, only the result of the code is visualized
 frontend: the layer ontop of the backend, design UI, UIX
 (js, css, html)
 (bootstrap, angular)
+
+
+Non blocking async
+
+pattern MVC (model view controller)
+MODEL can be BD, apis, any source of data
+CONTROLLER any logic that can transform this info
+VIEW result of the controller
+
+
