@@ -1,6 +1,6 @@
 # Sprint 1
 
-check version 
+check node.js version 
 ```
 node -v
 ```
