@@ -1,8 +1,17 @@
 # Sprint 1
 
-check node.js version 
+### check node.js version 
+
 ```
 node -v
+```
+
+### nvm
+
+Change version
+
+```
+nvm use someVersion
 ```
 
 JS (swiss knife of coding, all device dev)
