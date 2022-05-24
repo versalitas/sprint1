@@ -24,6 +24,9 @@ npm update (use with care...)
 npm install somePackageName (installs only the specified package, if no version then the latest)
 npm install somePackageName@1.2.2 (installs specified version)
 npm install somePackageName -D (instala el package en devdependencias... )
+npm init (initialize el package.json)
+npm run 'scripts'
+npm install packageName -- save-dev (save en package.json en devdependencies)
 
 
 JS (swiss knife of coding, all device dev)
