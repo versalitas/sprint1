@@ -1,5 +1,10 @@
 # Sprint 1
 
+check version 
+```
+node -v
+```
+
 JS (swiss knife of coding, all device dev)
 
 arduino
@@ -27,9 +32,6 @@ node.js
 - can update from the server
 
 (streaming, datas en tempo real, i/o, api restfull, single page app, cellphones)
-
-
-
 
 
 difference client/ serverside languages
