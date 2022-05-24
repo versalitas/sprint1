@@ -19,6 +19,9 @@ nvm use someVersion
 node package manager
 npmjs.com
 
+nodemon install en dependencies
+
+
 npm install (installing makes it more easy to move the project)
 npm update (use with care...)
 npm install somePackageName (installs only the specified package, if no version then the latest)
