@@ -2,6 +2,15 @@
 
 JS (swiss knife of coding, all device dev)
 
+arduino
+data science
+app movil
+bbdd 
+backend
+frontend
+desktop apps
+AI
+
 
 node.js 
 
