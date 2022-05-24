@@ -19,7 +19,8 @@ nvm use someVersion
 node package manager
 npmjs.com
 
-nodemon install en dependencies
+npm install nodemon -save-dev
+
 
 
 npm install (installing makes it more easy to move the project)
