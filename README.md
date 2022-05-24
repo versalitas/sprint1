@@ -7,12 +7,24 @@ node -v
 ```
 
 ### nvm
+node version manager
 
 Change version
 
 ```
 nvm use someVersion
 ```
+
+### npm
+node package manager
+npmjs.com
+
+npm install (installing makes it more easy to move the project)
+npm update (use with care...)
+npm install somePackageName (installs only the specified package, if no version then the latest)
+npm install somePackageName@1.2.2 (installs specified version)
+npm install somePackageName -D (instala el package en devdependencias... )
+
 
 JS (swiss knife of coding, all device dev)
 
